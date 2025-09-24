@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
     // Confirmacion del correcto uso del programa (Confirmacion de 2 argumentos, el llamado y el tamaño de las matrices)
     if(argc != 2){
         printf("Numero argumentos incorrectos\n");
-        printf("\n\t $ejecutable.exe TAMAÑO \n");
+        printf("\n\t $ejecutable.exe SIZE \n");
         return -1;
     }
 
@@ -53,7 +53,8 @@ int main(int argc, char *argv[]) {
         return -1;
     };
 
-    float *mA, *mB, *mC;
+    // Declaracion de 3 apuntadores para las 3 matrices
+    double *mA, *mB, *mC;
 
     /** Se le asigna memoria dinamica a los 3 apuntadores globales teniendo en cuenta el tamaño dado en los argumentos**/
     mA = (double *) malloc(N*N*sizeof(double));
@@ -67,16 +68,33 @@ int main(int argc, char *argv[]) {
 	imprMatrices(N, mA);
 	imprMatrices(N, mB);
 
-     // Algoritmo de multiplicacion de matrices
-     	InicioMuestra();
+    // Inicio de la medicion de tiempo
+    InicioMuestra();
+
+    // Algoritmo de multiplicacion de matrices
 	multiMatrizClasica(N, mA, mB, mC);
-	FinMuestra();
 
-	imprMatrices(N, mC);
+    // Impresion de la matriz resultado
+    imprMatrices(N, mC);
 
-        /** Se libera la emoria de las matrices **/
+    // Impresion del tiempo de ejecucion, el if se usa solo para mejorar el formato de salida
+    if(N<9){// En caso de que se impriman las matrices se necesita un doble salto
+        printf("\n\n Tiempo en microsegundos:");
+    }else{// En caso de que no se impriman las matrices se necesita un solo salto
+        printf("\nTiempo en microsegundos:");
+    }
+
+    // Fin de la medicion de tiempo
+	FinMuestra();	
+
+    // Salto de linea para mejorar el formato de salida
+    printf("\n");
+
+    /** Se libera la emoria de las matrices **/
 	free(mA);
-        free(mB);
-        free(mC);
-        return 0;
+    free(mB);
+    free(mC);
+
+    // Final del programa
+    return 0;
 }
