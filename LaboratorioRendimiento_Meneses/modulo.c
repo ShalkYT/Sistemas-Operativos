@@ -8,7 +8,7 @@
 *************************************************************************************/
 
 // Solo es necesario incluir el archivo .h porque este ya incluye las librerias necesarias
-#include "modulo.h"
+#include "interfaz.h"
 
 // Declaracion de variables de tipo struct timeval
 struct timeval ini, fin;

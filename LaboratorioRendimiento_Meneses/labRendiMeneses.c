@@ -31,7 +31,7 @@
  *  - Se desencapsulan los datos dentro de la función MxM (descomprimen)
 *************************************************************************************/
 
-#include "modulo.h"
+#include "interfaz.h"
 #include <stdio.h>
 #include <stdlib.h>
 
