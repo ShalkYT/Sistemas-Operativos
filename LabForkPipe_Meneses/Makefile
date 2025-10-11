@@ -11,6 +11,7 @@ lab01:
 lab2:
 	$(GCC) $(FLAGS) lab02_Meneses.c -o main
 
+# .c en el cual un padre y un hijo se comunican mediante pipes
 lab3:
 	$(GCC) $(FLAGS) lab03_Meneses.c -o main
 
