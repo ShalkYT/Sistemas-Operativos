@@ -1,0 +1,16 @@
+GCC = gcc
+FLAGS =
+RM = rm -f
+
+MODUlO =
+
+PROGRAMAS = cliente servidor
+
+cliente:
+	$(GCC) $(FLAGS) $@.c -o $@
+
+servidor:
+	$(GCC) $(FLAGS) $@.c -o $@
+
+clear:
+	$(RM) $(PROGRAMAS)
