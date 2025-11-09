@@ -3,7 +3,7 @@ CFLAGS = -lm
 FOPENMP = -fopenmp -O3
 POSIX = -lpthread
 
-PROGRAMAS = mmClasicaOpenMP 
+PROGRAMAS = mmClasicaOpenMP mmClasicaFork mmClasicaPosix mmFilasOpenMP
 
 All: $(PROGRAMAS)
 
@@ -12,6 +12,12 @@ mmClasicaFork:
 
 mmClasicaOpenMP:
 	$(GCC) $(CLFAGS) $@.c -o $@ $(FOPENMP)
+
+mmFilasOpenMP:
+	$(GCC) $(CLFAGS) $@.c -o $@ $(FOPENMP)
+
+mmClasicaPosix:
+	$(GCC) $(CLFAGS) $@.c -o $@ 
 
 clean:
 	$(RM) $(PROGRAMAS) 

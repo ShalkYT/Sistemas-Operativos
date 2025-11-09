@@ -11,8 +11,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <time.h>
 
 #define MIN(x,y) (((x) < (y))?x:y)
+
+struct timeval inicio, fin; 
+
+void InicioMuestra(){
+	gettimeofday(&inicio, (void *)0);
+}
+
+void FinMuestra(){
+	gettimeofday(&fin, (void *)0);
+	fin.tv_usec -= inicio.tv_usec;
+	fin.tv_sec  -= inicio.tv_sec;
+	double tiempo = (double) (fin.tv_sec*1000000 + fin.tv_usec);
+	printf("Tiempo de ejecucion: %0.4fs\n", tiempo/1000000);
+}
+
 
 // Funcion de sumatorio
 double funcSum(int i){
@@ -34,24 +50,29 @@ int main(int argc, char *argv[]){
 	//Declaracion de variable que contendra valores de la sumatoria
 	double resSumatoria = 0;
 
+	// Confirmaciond de argumentos
 	if(argc != 3){
 	printf("ERROR: \n\t $../ejecutable numHilos numRepeticiones\n");
 	}
+	// Transformacin del primer argumento en el numero de hilos (entero)
 	int numHilos = (int) atoi(argv[1]);
+	// Transformacin del primer argumento en el numero de repeticiones (entero)
 	int repeticiones = (int) atoi(argv[2]);
 
 	// Fijacion del numero de hilos deseados
 	omp_set_num_threads(numHilos);
 	printf("Numero de hilos fijados a %d \n", numHilos);
+	InicioMuestra();
 	// Region paralela por OMP
 	#pragma omp parallel
 	{
+		// Ciclo para cada uno de los hilos y que el resultado obtenido en estos se guarde en resSumatoria
 		#pragma omp parallel for reduction(+: resSumatoria)
 		for(int i = 0; i < repeticiones; i++){
 			resSumatoria += funcSum(i);
 		}
 	}
-
+	FinMuestra();
 	printf("Resultado de la sumatoria de la funcion seno: %0.2f \n", resSumatoria);
 
 	// Fin del programa

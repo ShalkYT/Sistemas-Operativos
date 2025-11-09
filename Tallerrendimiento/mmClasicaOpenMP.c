@@ -1,11 +1,11 @@
 /*#######################################################################################
- #* Fecha:
+ #* Fecha: 
  #* Autor: J. Corredor, PhD
- #* Programa:
- #*      Multiplicación de Matrices algoritmo matriz Transpuesta (Filas x Filas) 
+ #* Programa: 
+ #* 	 Multiplicación de Matrices algoritmo clásico
  #* Versión:
- #*      Paralelismo con OpenMP
- #######################################################################################*/
+ #*	 Paralelismo con OpenMP
+######################################################################################*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,7 +13,6 @@
 #include <time.h>
 #include <sys/time.h>
 #include <omp.h>
-
 
 struct timeval inicio, fin; 
 
@@ -26,42 +25,28 @@ void FinMuestra(){
 	fin.tv_usec -= inicio.tv_usec;
 	fin.tv_sec  -= inicio.tv_sec;
 	double tiempo = (double) (fin.tv_sec*1000000 + fin.tv_usec); 
-	printf("%9.0f \n", tiempo);
+	printf("%.0f;", tiempo);
 }
 
-void impMatrix(double *matrix, int D, int t){
-	int aux = 0;
-	if(D < 6)
-		switch(t){
-			case 0:
-				for(int i=0; i<D*D; i++){
-					if(i%D==0) printf("\n");
-						printf("%.2f ", matrix[i]);
-				}
-				printf("\n  - \n");
-				break;
-			case 1:
-				while(aux<D){
-					for(int i=aux; i<D*D; i+=D)
-						printf("%.2f ", matrix[i]);
-					aux++;
-					printf("\n");
-				}	
-				printf("\n  - \n");
-				break;
-			default:
-				printf("Sin tipo de impresión\n");
+void impMatrix(double *matrix, int D){
+	if(D < 9){
+		printf("\n");
+		for(int i=0; i<D*D; i++){
+			if(i%D==0) printf("\n");
+			printf("%.2f ", matrix[i]);
 		}
+		printf("\n**-----------------------------**\n");
+	}
 }
 
 void iniMatrix(double *m1, double *m2, int D){
 	for(int i=0; i<D*D; i++, m1++, m2++){
 		*m1 = (double)rand()/RAND_MAX*(5.0-1.0);	
-		*m2 = (double)rand()/RAND_MAX*(9.0-5.0);		
+		*m2 = (double)rand()/RAND_MAX*(9.0-2.0);	
 	}
 }
 
-void multiMatrixTrans(double *mA, double *mB, double *mC, int D){
+void multiMatrix(double *mA, double *mB, double *mC, int D){
 	double Suma, *pA, *pB;
 	#pragma omp parallel
 	{
@@ -69,9 +54,9 @@ void multiMatrixTrans(double *mA, double *mB, double *mC, int D){
 	for(int i=0; i<D; i++){
 		for(int j=0; j<D; j++){
 			pA = mA+i*D;	
-			pB = mB+j*D;	
+			pB = mB+j; 
 			Suma = 0.0;
-			for(int k=0; k<D; k++, pA++, pB++){
+			for(int k=0; k<D; k++, pA++, pB+=D){
 				Suma += *pA * *pB;
 			}
 			mC[i*D+j] = Suma;
@@ -92,20 +77,22 @@ int main(int argc, char *argv[]){
 	double *matrixA  = (double *)calloc(N*N, sizeof(double));
 	double *matrixB  = (double *)calloc(N*N, sizeof(double));
 	double *matrixC  = (double *)calloc(N*N, sizeof(double));
+
 	srand(time(NULL));
 
 	omp_set_num_threads(TH);
 
 	iniMatrix(matrixA, matrixB, N);
 
-	impMatrix(matrixA, N, 0);
-	impMatrix(matrixB, N, 1);
+	// impMatrix(matrixA, N);
+	// impMatrix(matrixB, N);
 
 	InicioMuestra();
-	multiMatrixTrans(matrixA, matrixB, matrixC, N);
+	multiMatrix(matrixA, matrixB, matrixC, N);
 	FinMuestra();
+	printf("%d;%d \n", N, TH);
 
-	impMatrix(matrixC, N, 0);
+	// impMatrix(matrixC, N);
 
 	/*Liberación de Memoria*/
 	free(matrixA);

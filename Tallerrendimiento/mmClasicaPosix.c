@@ -34,7 +34,7 @@ void FinMuestra(){
 	fin.tv_usec -= inicio.tv_usec;
 	fin.tv_sec  -= inicio.tv_sec;
 	double tiempo = (double) (fin.tv_sec*1000000 + fin.tv_usec);
-	printf("%9.0f \n", tiempo);
+	printf("%.0f", tiempo);
 }
 
 
@@ -98,8 +98,8 @@ int main(int argc, char *argv[]){
 	matrixC  = (double *)calloc(N*N, sizeof(double));
 
 	iniMatrix(matrixA, matrixB, N);
-	impMatrix(matrixA, N);
-	impMatrix(matrixB, N);
+	// impMatrix(matrixA, N);
+	// impMatrix(matrixB, N);
 
 	InicioMuestra();
 
@@ -120,8 +120,9 @@ int main(int argc, char *argv[]){
         pthread_join(p[j],NULL);
 
 	FinMuestra();
+	printf(";%d;%d \n", N, n_threads);
 	
-	impMatrix(matrixC, N);
+	// impMatrix(matrixC, N);
 
 	/*Liberación de Memoria*/
 	free(matrixA);

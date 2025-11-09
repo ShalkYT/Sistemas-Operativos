@@ -42,6 +42,7 @@ int main(){
 	// Region paralela por OMP
 	#pragma omp parallel
 	{
+		// Ciclo para cada uno de los hilos y que el resultado obtenido en estos se guarde en resSumatoria
 		#pragma omp for reduction(+: resSumatoria)
 		for(int i = 0; i < Repeticiones; i++){
 			resSumatoria += funcSum(i);
