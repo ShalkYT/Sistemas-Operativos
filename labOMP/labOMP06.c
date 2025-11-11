@@ -13,14 +13,18 @@
 #include <math.h>
 #include <time.h>
 
+// Definicion de funcion que saca el valor minimo
 #define MIN(x,y) (((x) < (y))?x:y)
 
+// Variables para la medicion de tiempo
 struct timeval inicio, fin; 
 
+// Funcion para iniciar la medicion del tiempo de ejecucion
 void InicioMuestra(){
 	gettimeofday(&inicio, (void *)0);
 }
 
+// Funcion para terminar la medicion del tiempo de ejecucion
 void FinMuestra(){
 	gettimeofday(&fin, (void *)0);
 	fin.tv_usec -= inicio.tv_usec;
@@ -52,7 +56,8 @@ int main(int argc, char *argv[]){
 
 	// Confirmaciond de argumentos
 	if(argc != 3){
-	printf("ERROR: \n\t $../ejecutable numHilos numRepeticiones\n");
+		printf("ERROR: \n\t $../ejecutable numHilos numRepeticiones\n");
+		return 0;
 	}
 	// Transformacin del primer argumento en el numero de hilos (entero)
 	int numHilos = (int) atoi(argv[1]);

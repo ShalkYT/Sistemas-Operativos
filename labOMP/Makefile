@@ -16,6 +16,8 @@ RM = rm -rf
 # Todos los programas que tiene el laboratorio
 PROGRAMAS = labOMP01 labOMP02 labOMP03 labOMP04 labOMP05 labOMP06
 
+all: $(PROGRAMAS)
+
 # Compilacion del pimer programa
 labOMP01:
 	$(GCC) $@.c -o $@ $(FLAGS)

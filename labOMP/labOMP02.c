@@ -14,7 +14,8 @@
 int main(int argc, char *argv[]){
 
 	if(argc != 2){
-	printf("ERROR: \n\t $../ejecutable numHilos\n");
+		printf("ERROR: \n\t $../ejecutable numHilos\n");
+		return 0;
 	}
 	int numHilos = (int) atoi(argv[1]);
 
