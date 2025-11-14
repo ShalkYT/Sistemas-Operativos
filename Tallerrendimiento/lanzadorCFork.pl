@@ -1,8 +1,8 @@
 #!/usr/bin/perl
 #**************************************************************
 #         		Pontificia Universidad Javeriana
-#     Autor: 
-#     Fecha: 
+#     Autor: Andres Eduardo Meneses Rincon y Karol Dayan Torres Vides
+#     Fecha: 14/11/2025
 #     Materia: Sistemas Operativos
 #     Tema: Taller de Evaluación de Rendimiento
 #     Fichero: script automatización ejecución por lotes 
