@@ -8,21 +8,21 @@
 #############################################################
 
 GCC = gcc
-CFLAGS = -Wall
+CFLAGS =
 RM = -rf
 
-PROGRAMAS = consumer concurrenciaPOsix posixSincro producer
+PROGRAMAS = consumer concurrenciaPosix posixSincro producer
 
 ALL: $(PROGRAMAS)
 
 consumer:
 	$(GCC) $@.c -o $@ $(FLAGS) 
 
-concurrenciaPOsix:
-	$(GCC) $@.c -o $@ $(FLAGS) 
+concurrenciaPosix:
+	$(GCC) modulo$@.c $@.c -o $@ $(FLAGS) 
 
 posixSincro:
-	$(GCC) $@.c -o $@ $(FLAGS) 
+	$(GCC) modulo$@.c $@.c -o $@ $(FLAGS) 
 
 producer:
 	$(GCC) $@.c -o $@ $(FLAGS) 

@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <fcntl.h>      // O_CREAT, O_RDWR
-#include <sys/mman.h>   // shm_open, mmap
-#include <semaphore.h>  // sem_open, sem_wait, sem_post
+#include <fcntl.h>    
+#include <sys/mman.h> 
+#include <semaphore.h> 
 
 
 #define BUFFER 10
