@@ -1,46 +1,60 @@
-/*#######################################################################################
- #* Fecha: 14/11/2025
- #* Autor: Andres Eduardo Meneses Rincon y Karol Dayan Torres Vides
- #* Programa:
- #*      Multiplicación de Matrices algoritmo matriz Transpuesta (Filas x Filas) 
- #* Versión:
- #*      Paralelismo con OpenMP
- #######################################################################################*/
+/**************************************************************************************************
+* Pontificia Universidad Javeriana
+* Autor: Andres Eduardo Meneses Rincon y Karol Dayan Torres Vides
+* Materia: Sistemas Operativos
+* Tema: Multiplicación de matrices (Filas x Filas) usando transpuesta con OpenMP
+* Descripción:
+*  - Programa principal que multiplica dos matrices NxN utilizando el algoritmo de matriz transpuesta.
+*  - Se implementa paralelismo con OpenMP, permitiendo definir el número de hilos.
+**************************************************************************************************/
 
 #include "moduloFilasOpenMP.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <omp.h>
 
+// Función principal
 int main(int argc, char *argv[]){
-	if(argc < 3){
-		printf("\n Use: $./clasicaOpenMP SIZE Hilos \n\n");
-		exit(0);
-	}
+    // Validar argumentos de entrada
+    if(argc < 3){
+        printf("\n Use: $./clasicaOpenMP SIZE Hilos \n\n");
+        exit(0);
+    }
 
+    int N  = atoi(argv[1]); // Tamaño de las matrices
+    int TH = atoi(argv[2]); // Número de hilos
 
-	int N = atoi(argv[1]);
-	int TH = atoi(argv[2]);
-	double *matrixA  = (double *)calloc(N*N, sizeof(double));
-	double *matrixB  = (double *)calloc(N*N, sizeof(double));
-	double *matrixC  = (double *)calloc(N*N, sizeof(double));
-	srand(time(NULL));
+    // Reservar memoria para matrices
+    double *matrixA = (double *) calloc(N*N, sizeof(double));
+    double *matrixB = (double *) calloc(N*N, sizeof(double));
+    double *matrixC = (double *) calloc(N*N, sizeof(double));
 
-	omp_set_num_threads(TH);
+    if(matrixA == NULL || matrixB == NULL || matrixC == NULL){
+        fprintf(stderr, "Error reservando memoria\n");
+        return 1;
+    }
 
-	iniMatrix(matrixA, matrixB, N);
+    srand(time(NULL));      // Inicializar semilla aleatoria
+    omp_set_num_threads(TH); // Configurar número de hilos para OpenMP
 
-	// impMatrix(matrixA, N, 0);
-	// impMatrix(matrixB, N, 1);
+    iniMatrix(matrixA, matrixB, N); // Inicializar matrices A y B
 
-	InicioMuestra();
-	multiMatrixTrans(matrixA, matrixB, matrixC, N);
-	FinMuestra();
-	printf(";%d;%d \n", N, TH);
+    // impMatrix(matrixA, N, 0);
+    // impMatrix(matrixB, N, 1);
 
-	// impMatrix(matrixC, N, 0);
+    InicioMuestra(); // Iniciar medición de tiempo
+    multiMatrixTrans(matrixA, matrixB, matrixC, N); // Multiplicación usando transpuesta
+    FinMuestra();    // Finalizar medición de tiempo
 
-	/*Liberación de Memoria*/
-	free(matrixA);
-	free(matrixB);
-	free(matrixC);
-	
-	return 0;
+    printf(";%d;%d \n", N, TH); // Mostrar tamaño de matriz y número de hilos
+
+    // impMatrix(matrixC, N, 0);
+
+    // Liberar memoria
+    free(matrixA);
+    free(matrixB);
+    free(matrixC);
+
+    return 0;
 }
