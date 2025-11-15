@@ -1,9 +1,9 @@
 ############################################################
 #		Pontificia Universidad Javeriana
 #		Sistemas Operativos
-#		Autores:
+#		Autores:Santiago Hernandez Morales, Jose Jesus Cepeda Vargas, Karol Dayan Torres Vides,Andres Eudardo Meneses Rincon.
 #		Docente: J. Corredor
-#		Descripción: 
+#		Descripción: Pemire la automatizacion de la compilacion de los programas
 #
 #############################################################
 
