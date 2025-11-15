@@ -12,7 +12,7 @@
  * "
  *********************************************************************************************/
 
-#include "moduloConcurrenciaPosix.h"
+#include "moduloconcurrenciaPosix.h"
 
 int main(int argc, char *argv[]) {
         FILE *fichero;
