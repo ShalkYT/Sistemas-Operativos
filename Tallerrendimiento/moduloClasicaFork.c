@@ -1,6 +1,6 @@
 /**************************************************************************************************
 * Pontificia Universidad Javeriana
-* Autor: J. Corredor, PhD
+* Autor: Andres Eduardo Meneses Rincon y Karol Dayan Torres Vides
 * Materia: Sistemas Operativos
 * Tema: Multiplicación de matrices algoritmo clásico con procesos Fork
 * Descripción:

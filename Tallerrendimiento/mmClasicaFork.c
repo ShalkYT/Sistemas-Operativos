@@ -1,6 +1,6 @@
 /**************************************************************************************************
 * Pontificia Universidad Javeriana
-* Autor: Andres Eduardo Meneses Rincon
+* Autor: Andres Eduardo Meneses Rincon y Karol Dayan Torres Vides
 * Materia: Sistemas Operativos
 * Tema: Multiplicación de matrices usando fork()
 * Descripción:

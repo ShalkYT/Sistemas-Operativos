@@ -1,6 +1,6 @@
 /**************************************************************************************************
 * Pontificia Universidad Javeriana
-* Autor: J. Corredor, PhD
+* Autor: Andres Eduardo Meneses Rincon y Karol Dayan Torres Vides
 * Materia: Sistemas Operativos
 * Tema: Funciones auxiliares para multiplicación de matrices usando transpuesta (Filas x Filas) con OpenMP
 * Descripción:
